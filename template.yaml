@@ -1,0 +1,24 @@
+Resources:
+  Ec2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-0947d2ba12ee1ff75 # Amazon Linux AMI in us-east-1
+      KeyName: mykey
+      Tags:
+        - Key: Name
+          Value: DemoInstance
+        - Key: Owner
+          Value: root
+     
+  MyDB:
+   Type: AWS::RDS::DBInstance
+   Properties:
+    AllocatedStorage: '5'
+    DBInstanceClass: db.t3.small
+    Engine: postgres
+    MasterUsername: postgres
+    MasterUserPassword: password
+   DeletionPolicy: Snapshot     
+
+    

@@ -1,0 +1,66 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters" : {
+    "cftjavacode" : {
+      "Type" : "String"
+    }
+  },
+"Resources": {
+  "RootRole": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Version" : "2012-10-17",
+          "Statement": [ {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [ "ec2.amazonaws.com" ]
+            },
+            "Action": [ "sts:AssumeRole" ]
+          } ]
+        },
+        "Path": "/",
+        "Policies": [ {
+          "PolicyName": "root",
+          "PolicyDocument": {
+            "Version" : "2012-10-17",
+            "Statement": [ {
+              "Effect": "Allow",
+              "Action": [
+                "s3:Get*",
+                "s3:List*"
+              ],
+              "Resource": {"Fn::Join" : [ "", [ "arn:aws:s3:::", {"Ref": "cftjavacode"},"/*"] ] }
+            } ]
+          }
+        } ]
+        }
+      },
+      
+     "RootInstanceProfile": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Path": "/",
+        "Roles": [ {
+          "Ref": "RootRole"
+        } ]
+      }
+      },
+    
+    "Ec2Instance": {
+      "Type": "AWS::EC2::Instance",
+      "Properties": {
+        "ImageId": "ami-0947d2ba12ee1ff75",
+        "InstanceType": "t2.micro",
+        "KeyName": "mykey",
+        "IamInstanceProfile": {"Ref": "RootInstanceProfile"},
+        "UserData": {
+                    "Fn::Base64": {
+                        "Fn::Sub": "#!/bin/bash \n aws s3 cp s3://cftjavacode/BeanStackTest1-0.0.1-SNAPSHOT.jar /home/ec2-user/BeanStackTest1-0.0.1-SNAPSHOT.jar\n
+                        yum install java-17-amazon-corretto-headless\n
+                        java -jar BeanStackTest1-0.0.1-SNAPSHOT.jar "
+      }
+    }
+    }
+    }
+    }}
