@@ -1,0 +1,24 @@
+- name: Ansible test
+  hosts: localhost
+  gather_facts: False
+  tasks:
+    - name: Create EC2 Instance
+      ec2_instance:
+        region: us-east-1
+        key_name: mykey 
+        instance_type: t2.micro
+        image_id: ami-08a52ddb321b32a8c
+        wait: yes
+        count: 1
+        
+        #Ansible-playbook -C ansibledemo.yaml
+        #Ansible-playbook ansibledemo.yaml
+        #install python3 pip and boto
+        #brew install ansible
+        #check python3 --version ansible --version
+        #https://medium.com/@deepak.kumbhar/how-to-create-ec2-instances-using-ansible-1b87a35edc0b
+        #configure aws cli authenticate with aws access key and secret key
+        #instance created ,terminate instance
+        #export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+        #export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+         #export AWS_DEFAULT_REGION=us-east-1
