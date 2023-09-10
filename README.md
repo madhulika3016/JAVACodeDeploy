@@ -1,3 +1,25 @@
+#Steps for codecommit local system
+
+connect with username and password.
+
+git clone copy codecommit url
+
+cd localrepo
+
+git add filename
+
+git commit -m "commit message"
+
+git push
+
+
+
+
+
+
+
+
+
 # JAVACodeDeploy
 this is a repo for aws code commit,build,deploy ,pipeline
 
@@ -9,3 +31,7 @@ sudo service codedeploy-agent status
 java -version
 
 java -jar abc.jar
+
+
+
+
