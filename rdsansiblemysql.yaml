@@ -1,0 +1,21 @@
+- name: Ansible test
+  hosts: localhost
+  gather_facts: False 
+  tasks:
+    - name: Create RDS Instance  
+      rds_instance:
+        allocated_storage: 20
+        db_instance_class: "db.t3.medium"
+        db_instance_identifier: "testrds"
+        db_name: "demodb"
+        engine: "mysql"
+        master_user_password: "password1234"
+        master_username: "dbmaster"
+        max_allocated_storage: 50
+        port: "3306"
+        region: "us-east-1"
+        state: "present"
+        storage_type: "gp2"
+  
+        
+        
