@@ -4,8 +4,8 @@
   tasks:
     - name: Create RDS Instance  
       rds_instance:
-        allocated_storage: 20
-        db_instance_class: "db.t3.medium"
+        allocated_storage: 5
+        db_instance_class: "db.t3.micro"
         db_instance_identifier: "testrds"
         db_name: "demodb"
         engine: "mysql"
